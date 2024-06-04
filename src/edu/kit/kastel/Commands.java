@@ -9,92 +9,100 @@ public class Commands {
     public static final char WHITE_SOUTH = 's';
     public static final char WHITE_EAST = 'o';
     public static final char WHITE_WEST = 'w';
+    private void nextDirectionWhite(char[][] currentGameBoard, int rowIndex, int colIndex) {
+        switch (currentGameBoard[rowIndex][colIndex]) {
+            case WHITE_NORTH -> {
+                if (rowIndex - 1 >= 0) {
+                    currentGameBoard[rowIndex][colIndex] = '1';
+                    if (currentGameBoard[rowIndex - 1][colIndex] == '0') {
+                        currentGameBoard[rowIndex - 1][colIndex] = BLACK_EAST;
+                    } else if (currentGameBoard[rowIndex - 1][colIndex] == '1') {
+                        currentGameBoard[rowIndex - 1][colIndex] = WHITE_WEST;
+                    }
+                }
+            }
+            case WHITE_SOUTH -> {
+                if (rowIndex + 1 < currentGameBoard.length) {
+                    currentGameBoard[rowIndex][colIndex] = '1';
+                    if (currentGameBoard[rowIndex + 1][colIndex] == '0') {
+                        currentGameBoard[rowIndex + 1][colIndex] = BLACK_WEST;
+                    } else if (currentGameBoard[rowIndex + 1][colIndex] == '1') {
+                        currentGameBoard[rowIndex + 1][colIndex] = WHITE_EAST;
+                    }
+                }
+            }
+            case WHITE_EAST -> {
+                if  (colIndex + 1 < currentGameBoard[0].length) {
+                    currentGameBoard[rowIndex][colIndex] = '1';
+                    if (currentGameBoard[rowIndex][colIndex + 1] == '0') {
+                        currentGameBoard[rowIndex][colIndex + 1] = BLACK_SOUTH;
+                    } else if (currentGameBoard[rowIndex][colIndex + 1] == '1') {
+                        currentGameBoard[rowIndex][colIndex + 1] = WHITE_NORTH;
+                    }
+                }
+            }
+            case WHITE_WEST -> {
+                if (colIndex - 1 >= 0) {
+                    currentGameBoard[rowIndex][colIndex] = '1';
+                    if (currentGameBoard[rowIndex][colIndex - 1] == '0') {
+                        currentGameBoard[rowIndex][colIndex - 1] = BLACK_NORTH;
+                    } else if (currentGameBoard[rowIndex][colIndex - 1] == '1') {
+                        currentGameBoard[rowIndex][colIndex - 1] = WHITE_SOUTH;
+                    }
+                }
+            }
+        }
+    }
+    private void nextDirectionBLack(char[][] currentGameBoard, int rowIndex, int colIndex) {
+        switch (currentGameBoard[rowIndex][colIndex]) {
+            case BLACK_NORTH -> {
+                if (rowIndex - 1 >= 0) {
+                    currentGameBoard[rowIndex][colIndex] = '0';
+                    if (currentGameBoard[rowIndex - 1][colIndex] == '0') {
+                        currentGameBoard[rowIndex - 1][colIndex] = BLACK_EAST;
+                    } else if (currentGameBoard[rowIndex - 1][colIndex] == '1') {
+                        currentGameBoard[rowIndex - 1][colIndex] = WHITE_WEST;
+                    }
+                }
+            }
+            case BLACK_SOUTH -> {
+                if (rowIndex + 1 < currentGameBoard.length) {
+                    currentGameBoard[rowIndex][colIndex] = '0';
+                    if (currentGameBoard[rowIndex + 1][colIndex] == '0') {
+                        currentGameBoard[rowIndex + 1][colIndex] = BLACK_WEST;
+                    } else if (currentGameBoard[rowIndex + 1][colIndex] == '1') {
+                        currentGameBoard[rowIndex + 1][colIndex] = WHITE_EAST;
+                    }
+                }
+            }
+            case BLACK_EAST -> {
+                if  (colIndex + 1 < currentGameBoard[0].length) {
+                    currentGameBoard[rowIndex][colIndex] = '0';
+                    if (currentGameBoard[rowIndex][colIndex + 1] == '0') {
+                        currentGameBoard[rowIndex][colIndex + 1] = BLACK_SOUTH;
+                    } else if (currentGameBoard[rowIndex][colIndex + 1] == '1') {
+                        currentGameBoard[rowIndex][colIndex + 1] = WHITE_NORTH;
+                    }
+                }
+            }
+            case BLACK_WEST -> {
+                if (colIndex - 1 >= 0) {
+                    currentGameBoard[rowIndex][colIndex] = '0';
+                    if (currentGameBoard[rowIndex][colIndex - 1] == '0') {
+                        currentGameBoard[rowIndex][colIndex - 1] = BLACK_NORTH;
+                    } else if (currentGameBoard[rowIndex][colIndex - 1] == '1') {
+                        currentGameBoard[rowIndex][colIndex - 1] = WHITE_SOUTH;
+                    }
+                }
+            }
+        }
+    }
     public char[][] moveOptions(char[][] currentGameBoard) {
         char[][] newGameBoard;
         for (int j = 0; j < currentGameBoard.length; j++) {
             for (int k = 0; k < currentGameBoard[0].length; k++) {
-                switch (currentGameBoard[j][k]) {
-                    case BLACK_NORTH -> {
-                        if (j - 1 >= 0) {
-                            currentGameBoard[j][k] = '0';
-                            if (currentGameBoard[j - 1][k] == '0') {
-                                currentGameBoard[j - 1][k] = BLACK_EAST;
-                            } else if (currentGameBoard[j - 1][k] == '1') {
-                                currentGameBoard[j - 1][k] = WHITE_WEST;
-                            }
-                        }
-                    }
-                    case BLACK_SOUTH -> {
-                        if (j + 1 < currentGameBoard.length) {
-                            currentGameBoard[j][k] = '0';
-                            if (currentGameBoard[j + 1][k] == '0') {
-                                currentGameBoard[j + 1][k] = BLACK_WEST;
-                            } else if (currentGameBoard[j + 1][k] == '1') {
-                                currentGameBoard[j + 1][k] = WHITE_EAST;
-                            }
-                        }
-                    }
-                    case BLACK_EAST -> {
-                        if  (k + 1 < currentGameBoard[0].length) {
-                            currentGameBoard[j][k] = '0';
-                            if (currentGameBoard[j][k + 1] == '0') {
-                                currentGameBoard[j][k + 1] = BLACK_SOUTH;
-                            } else if (currentGameBoard[j][k + 1] == '1') {
-                                currentGameBoard[j][k + 1] = WHITE_NORTH;
-                            }
-                        }
-                    }
-                    case BLACK_WEST -> {
-                        if (k - 1 >= 0) {
-                            currentGameBoard[j][k] = '0';
-                            if (currentGameBoard[j][k - 1] == '0') {
-                                currentGameBoard[j][k - 1] = BLACK_NORTH;
-                            } else if (currentGameBoard[j][k - 1] == '1') {
-                                currentGameBoard[j][k - 1] = WHITE_SOUTH;
-                            }
-                        }
-                    }
-                    case WHITE_NORTH -> {
-                        if (j - 1 >= 0) {
-                            currentGameBoard[j][k] = '1';
-                            if (currentGameBoard[j - 1][k] == '0') {
-                                currentGameBoard[j - 1][k] = BLACK_EAST;
-                            } else if (currentGameBoard[j - 1][k] == '1') {
-                                currentGameBoard[j - 1][k] = WHITE_WEST;
-                            }
-                        }
-                    }
-                    case WHITE_SOUTH -> {
-                        if (j + 1 < currentGameBoard.length) {
-                            currentGameBoard[j][k] = '1';
-                            if (currentGameBoard[j + 1][k] == '0') {
-                                currentGameBoard[j + 1][k] = BLACK_WEST;
-                            } else if (currentGameBoard[j + 1][k] == '1') {
-                                currentGameBoard[j + 1][k] = WHITE_EAST;
-                            }
-                        }
-                    }
-                    case WHITE_EAST -> {
-                        if  (k + 1 < currentGameBoard[0].length) {
-                            currentGameBoard[j][k] = '1';
-                            if (currentGameBoard[j][k + 1] == '0') {
-                                currentGameBoard[j][k + 1] = BLACK_SOUTH;
-                            } else if (currentGameBoard[j][k + 1] == '1') {
-                                currentGameBoard[j][k + 1] = WHITE_NORTH;
-                            }
-                        }
-                    }
-                    case WHITE_WEST -> {
-                        if (k - 1 >= 0) {
-                            currentGameBoard[j][k] = '1';
-                            if (currentGameBoard[j][k - 1] == '0') {
-                                currentGameBoard[j][k - 1] = BLACK_NORTH;
-                            } else if (currentGameBoard[j][k - 1] == '1') {
-                                currentGameBoard[j][k - 1] = WHITE_SOUTH;
-                            }
-                        }
-                    }
-                }
+                nextDirectionBLack(currentGameBoard, j, k);
+                nextDirectionWhite(currentGameBoard, j, k);
             }
         }
         newGameBoard = currentGameBoard;
