@@ -1,6 +1,9 @@
 package edu.kit.kastel;
 
 public class Commands {
+    private Commands() {
+
+    }
     public static final char BLACK_NORTH = 'N';
     public static final char BLACK_SOUTH = 'S';
     public static final char BLACK_EAST = 'O';
@@ -9,7 +12,7 @@ public class Commands {
     public static final char WHITE_SOUTH = 's';
     public static final char WHITE_EAST = 'o';
     public static final char WHITE_WEST = 'w';
-    private void nextDirectionWhite(char[][] currentGameBoard, int rowIndex, int colIndex) {
+    private static void nextDirectionWhite(char[][] currentGameBoard, int rowIndex, int colIndex) {
         switch (currentGameBoard[rowIndex][colIndex]) {
             case WHITE_NORTH -> {
                 if (rowIndex - 1 >= 0) {
@@ -53,7 +56,7 @@ public class Commands {
             }
         }
     }
-    private void nextDirectionBLack(char[][] currentGameBoard, int rowIndex, int colIndex) {
+    private static void nextDirectionBLack(char[][] currentGameBoard, int rowIndex, int colIndex) {
         switch (currentGameBoard[rowIndex][colIndex]) {
             case BLACK_NORTH -> {
                 if (rowIndex - 1 >= 0) {
@@ -97,7 +100,7 @@ public class Commands {
             }
         }
     }
-    public char[][] moveOptions(char[][] currentGameBoard) {
+    public static char[][] moveOptions(char[][] currentGameBoard) {
         char[][] newGameBoard;
         for (int j = 0; j < currentGameBoard.length; j++) {
             for (int k = 0; k < currentGameBoard[0].length; k++) {
@@ -108,7 +111,7 @@ public class Commands {
         newGameBoard = currentGameBoard;
         return newGameBoard;
     }
-    public char[][] move(char[][] currentGameBoard, int value) {
+    public static char[][] move(char[][] currentGameBoard, int value) {
         if (value == 0) {
             return currentGameBoard;
         } else if (value > 0){
@@ -117,6 +120,35 @@ public class Commands {
         } else {
             System.err.println("Error: Input-Value is negative!");
             return null;
+        }
+    }
+
+    public static void print(char[][] currentGameBoard) {
+        int rows = currentGameBoard.length;
+        int cols = currentGameBoard[0].length;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                System.out.print(currentGameBoard[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+    public static void position(char[][] currentGameBoard) {
+        int rows = currentGameBoard.length;
+        int cols = currentGameBoard[0].length;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (!Character.isDigit(currentGameBoard[i][j])) {
+                    System.out.println(i + "," + j);
+                }
+            }
+        }
+    }
+
+    public static void field(char[][] currentGameBoard, int rowIndex, int colIndex) {
+        if (rowIndex < currentGameBoard.length && colIndex < currentGameBoard[0].length) {
+            System.out.println(currentGameBoard[rowIndex][colIndex]);
         }
     }
 }
