@@ -4,7 +4,7 @@ public class Commands {
     private Commands() {
 
     }
-    public static final char BLACK_NORTH = 'N';
+    public final static char BLACK_NORTH = 'N';
     public static final char BLACK_SOUTH = 'S';
     public static final char BLACK_EAST = 'O';
     public static final char BLACK_WEST = 'W';
