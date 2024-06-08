@@ -2,7 +2,17 @@ package edu.kit.kastel;
 
 import java.util.List;
 
+/**
+ * A class for processing the game file.
+ *
+ * @author uijyl
+ */
 public class GameFileReader {
+    /**
+     * This method reads a game file by using the FileHelper class and converts the game file into a usable game board.
+     * @param args represents the data structure where the game file is located.
+     * @return This method returns the game file depicted as a game board by converting it to a matrix.
+     */
     public char[][] gameBoardInitiator(String[] args) {
         List<String> fileLines = FileHelper.readAllLines(args[0]);
         int rows = fileLines.size();
@@ -11,12 +21,10 @@ public class GameFileReader {
         for (int i = 0; i < rows; i++) {
             char[] lineCharacters = fileLines.get(i).toCharArray();
             for (int j = 0; j < cols; j++) {
-                // Überprüfen, ob die aktuelle Zeile lang genug ist, um auf das j-te Element zuzugreifen
                 if (j < lineCharacters.length) {
                     gameBoard[i][j] = lineCharacters[j];
                 } else {
-                    System.err.println("Error: Invalid GameFile!");
-                    return null;
+                    throw new IllegalArgumentException("Error: Invalid game file!");
                 }
             }
         }

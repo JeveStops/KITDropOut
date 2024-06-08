@@ -1,10 +1,16 @@
-package edu.kit.kastel;
+package edu.kit.commands;
 
-public class Commands {
-    private Commands() {
+/**
+ * A class containing the functionality of the move-command for convenient usage.
+ *
+ * @author uijyl
+ */
+public class MoveCommand {
+    public MoveCommand() {
 
     }
-    public final static char BLACK_NORTH = 'N';
+    public static boolean isOutside = false;
+    public static final char BLACK_NORTH = 'N';
     public static final char BLACK_SOUTH = 'S';
     public static final char BLACK_EAST = 'O';
     public static final char BLACK_WEST = 'W';
@@ -12,143 +18,170 @@ public class Commands {
     public static final char WHITE_SOUTH = 's';
     public static final char WHITE_EAST = 'o';
     public static final char WHITE_WEST = 'w';
-    private static void nextDirectionWhite(char[][] currentGameBoard, int rowIndex, int colIndex) {
+
+    /**
+     * This method is used to check if the ant is outside the game board.
+     * @return True if the ant is outside the game board and false if not.
+     */
+    public boolean getIsOutside() {
+        return isOutside;
+    }
+
+    /**
+     * This method defines the steps the ant will make for each orientation possibility if the ant is on a white field.
+     * @param currentGameBoard represents the current game board that the method will be referencing.
+     * @param rowIndex represents the index of the row that is currently being viewed.
+     * @param colIndex represents the index of the column that is currently being viewed.
+     */
+    private void nextDirectionWhite(char[][] currentGameBoard, int rowIndex, int colIndex) {
         switch (currentGameBoard[rowIndex][colIndex]) {
             case WHITE_NORTH -> {
                 if (rowIndex - 1 >= 0) {
-                    currentGameBoard[rowIndex][colIndex] = '1';
+                    currentGameBoard[rowIndex][colIndex] = '0';
                     if (currentGameBoard[rowIndex - 1][colIndex] == '0') {
                         currentGameBoard[rowIndex - 1][colIndex] = BLACK_EAST;
                     } else if (currentGameBoard[rowIndex - 1][colIndex] == '1') {
                         currentGameBoard[rowIndex - 1][colIndex] = WHITE_WEST;
                     }
+                } else {
+                    isOutside = true;
                 }
             }
             case WHITE_SOUTH -> {
                 if (rowIndex + 1 < currentGameBoard.length) {
-                    currentGameBoard[rowIndex][colIndex] = '1';
+                    currentGameBoard[rowIndex][colIndex] = '0';
                     if (currentGameBoard[rowIndex + 1][colIndex] == '0') {
                         currentGameBoard[rowIndex + 1][colIndex] = BLACK_WEST;
                     } else if (currentGameBoard[rowIndex + 1][colIndex] == '1') {
                         currentGameBoard[rowIndex + 1][colIndex] = WHITE_EAST;
                     }
+                } else {
+                    isOutside = true;
                 }
             }
             case WHITE_EAST -> {
                 if  (colIndex + 1 < currentGameBoard[0].length) {
-                    currentGameBoard[rowIndex][colIndex] = '1';
+                    currentGameBoard[rowIndex][colIndex] = '0';
                     if (currentGameBoard[rowIndex][colIndex + 1] == '0') {
                         currentGameBoard[rowIndex][colIndex + 1] = BLACK_SOUTH;
                     } else if (currentGameBoard[rowIndex][colIndex + 1] == '1') {
                         currentGameBoard[rowIndex][colIndex + 1] = WHITE_NORTH;
                     }
+                } else {
+                    isOutside = true;
                 }
             }
             case WHITE_WEST -> {
                 if (colIndex - 1 >= 0) {
-                    currentGameBoard[rowIndex][colIndex] = '1';
+                    currentGameBoard[rowIndex][colIndex] = '0';
                     if (currentGameBoard[rowIndex][colIndex - 1] == '0') {
                         currentGameBoard[rowIndex][colIndex - 1] = BLACK_NORTH;
                     } else if (currentGameBoard[rowIndex][colIndex - 1] == '1') {
                         currentGameBoard[rowIndex][colIndex - 1] = WHITE_SOUTH;
                     }
+                } else {
+                    isOutside = true;
                 }
             }
         }
     }
-    private static void nextDirectionBLack(char[][] currentGameBoard, int rowIndex, int colIndex) {
+
+    /**
+     * This method defines the steps the ant will make for each orientation possibility if the ant is on a black field.
+     * @param currentGameBoard represents the current game board that the method will be referencing.
+     * @param rowIndex represents the index of the row that is currently being viewed.
+     * @param colIndex represents the index of the column that is currently being viewed.
+     */
+    private void nextDirectionBlack(char[][] currentGameBoard, int rowIndex, int colIndex) {
         switch (currentGameBoard[rowIndex][colIndex]) {
             case BLACK_NORTH -> {
                 if (rowIndex - 1 >= 0) {
-                    currentGameBoard[rowIndex][colIndex] = '0';
+                    currentGameBoard[rowIndex][colIndex] = '1';
                     if (currentGameBoard[rowIndex - 1][colIndex] == '0') {
                         currentGameBoard[rowIndex - 1][colIndex] = BLACK_EAST;
                     } else if (currentGameBoard[rowIndex - 1][colIndex] == '1') {
                         currentGameBoard[rowIndex - 1][colIndex] = WHITE_WEST;
                     }
+                } else {
+                    isOutside = true;
                 }
             }
             case BLACK_SOUTH -> {
                 if (rowIndex + 1 < currentGameBoard.length) {
-                    currentGameBoard[rowIndex][colIndex] = '0';
+                    currentGameBoard[rowIndex][colIndex] = '1';
                     if (currentGameBoard[rowIndex + 1][colIndex] == '0') {
                         currentGameBoard[rowIndex + 1][colIndex] = BLACK_WEST;
                     } else if (currentGameBoard[rowIndex + 1][colIndex] == '1') {
                         currentGameBoard[rowIndex + 1][colIndex] = WHITE_EAST;
                     }
+                } else {
+                    isOutside = true;
                 }
             }
             case BLACK_EAST -> {
                 if  (colIndex + 1 < currentGameBoard[0].length) {
-                    currentGameBoard[rowIndex][colIndex] = '0';
+                    currentGameBoard[rowIndex][colIndex] = '1';
                     if (currentGameBoard[rowIndex][colIndex + 1] == '0') {
                         currentGameBoard[rowIndex][colIndex + 1] = BLACK_SOUTH;
                     } else if (currentGameBoard[rowIndex][colIndex + 1] == '1') {
                         currentGameBoard[rowIndex][colIndex + 1] = WHITE_NORTH;
                     }
+                } else {
+                    isOutside = true;
                 }
             }
             case BLACK_WEST -> {
                 if (colIndex - 1 >= 0) {
-                    currentGameBoard[rowIndex][colIndex] = '0';
+                    currentGameBoard[rowIndex][colIndex] = '1';
                     if (currentGameBoard[rowIndex][colIndex - 1] == '0') {
                         currentGameBoard[rowIndex][colIndex - 1] = BLACK_NORTH;
                     } else if (currentGameBoard[rowIndex][colIndex - 1] == '1') {
                         currentGameBoard[rowIndex][colIndex - 1] = WHITE_SOUTH;
                     }
+                } else {
+                    isOutside = true;
                 }
             }
         }
     }
-    public static char[][] moveOptions(char[][] currentGameBoard) {
+
+    /**
+     * This method executes a single turn.
+     * @param currentGameBoard represents the current game board where a turn will be made.
+     * @return The game board after a turn was made.
+     */
+    public char[][] singleMove(char[][] currentGameBoard) {
+        MoveCommand mover = new MoveCommand();
+        PositionCommand positionCheck = new PositionCommand();
+        FieldCommand fieldCheck = new FieldCommand();
         char[][] newGameBoard;
-        for (int j = 0; j < currentGameBoard.length; j++) {
-            for (int k = 0; k < currentGameBoard[0].length; k++) {
-                nextDirectionBLack(currentGameBoard, j, k);
-                nextDirectionWhite(currentGameBoard, j, k);
-            }
+        int rowIndex = positionCheck.position(currentGameBoard)[0];
+        int colIndex = positionCheck.position(currentGameBoard)[1];
+        if (Character.isUpperCase(fieldCheck.field(currentGameBoard, rowIndex, colIndex))) {
+            mover.nextDirectionBlack(currentGameBoard, rowIndex, colIndex);
+        } else if (Character.isLowerCase(fieldCheck.field(currentGameBoard, rowIndex, colIndex))) {
+            mover.nextDirectionWhite(currentGameBoard, rowIndex, colIndex);
         }
         newGameBoard = currentGameBoard;
         return newGameBoard;
     }
-    public static char[][] move(char[][] currentGameBoard, int value) {
+
+    /**
+     * This method makes a number of turns based on the value entered by the user.
+     * @param currentGameBoard represents the current game board before a number of turns are made.
+     * @param value represent the amount of turns that will be made.
+     * @return The game board after the turns were made.
+     */
+    public char[][] move(char[][] currentGameBoard, int value) {
+        MoveCommand mover = new MoveCommand();
         if (value == 0) {
             return currentGameBoard;
-        } else if (value > 0){
-            char[][] newGameBoard = moveOptions(currentGameBoard);
+        } else if (value > 0) {
+            char[][] newGameBoard = mover.singleMove(currentGameBoard);
             return move(newGameBoard, value - 1);
         } else {
             System.err.println("Error: Input-Value is negative!");
             return null;
-        }
-    }
-
-    public static void print(char[][] currentGameBoard) {
-        int rows = currentGameBoard.length;
-        int cols = currentGameBoard[0].length;
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                System.out.print(currentGameBoard[i][j]);
-            }
-            System.out.println();
-        }
-    }
-
-    public static void position(char[][] currentGameBoard) {
-        int rows = currentGameBoard.length;
-        int cols = currentGameBoard[0].length;
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (!Character.isDigit(currentGameBoard[i][j])) {
-                    System.out.println(i + "," + j);
-                }
-            }
-        }
-    }
-
-    public static void field(char[][] currentGameBoard, int rowIndex, int colIndex) {
-        if (rowIndex < currentGameBoard.length && colIndex < currentGameBoard[0].length) {
-            System.out.println(currentGameBoard[rowIndex][colIndex]);
         }
     }
 }

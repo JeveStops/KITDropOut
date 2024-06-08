@@ -1,13 +1,14 @@
 package edu.kit.kastel;
 
+/**
+ * The Main class with the main method is where the program will be started.
+ *
+ * @author uijyl
+ */
 public class Main {
     public static void main(String[] args) {
-        char[][] currentGameBoard = {
-                {'0', '0', '0'},
-                {'0', '0', '0'},
-                {'0', 'N', '0'}
-        };
-        Commands.position(currentGameBoard);
-        Commands.field(currentGameBoard, 2, 1);
+        GameFileReader gameFileReader = new GameFileReader();
+        char[][] currentGameBoard = gameFileReader.gameBoardInitiator(args);
+        GamePlay gamePlay = new GamePlay(currentGameBoard);
     }
 }
