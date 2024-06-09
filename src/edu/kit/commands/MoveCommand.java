@@ -21,7 +21,7 @@ public class MoveCommand {
 
     /**
      * This method is used to check if the ant is outside the game board.
-     * @return True if the ant is outside the game board and false if not.
+     * @return True if the ant is outside the game board and false if it is not.
      */
     public boolean getIsOutside() {
         return isOutside;
