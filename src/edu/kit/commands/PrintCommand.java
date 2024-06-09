@@ -10,7 +10,6 @@ public class PrintCommand {
 
     }
     public void print(char[][] currentGameBoard) {
-        int rows = currentGameBoard.length;
         int cols = currentGameBoard[0].length;
         for (char[] chars : currentGameBoard) {
             for (int j = 0; j < cols; j++) {
