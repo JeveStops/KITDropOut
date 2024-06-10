@@ -60,6 +60,11 @@ public class GamePlay {
         }
     }
 
+    /**
+     * This method checks if the input matches the form of a position command.
+     * @param currentGameBoard represents the game board that will be referenced in the position command.
+     * @param inputParts represents the parts of the user input containing the information needed for this command.
+     */
     private void positionCommandCheck(char[][] currentGameBoard, String[] inputParts) {
         try {
             if (inputParts[0].equals(POSITION_COMMAND_NAME)) {
@@ -73,6 +78,11 @@ public class GamePlay {
         }
     }
 
+    /**
+     * This method checks if the input matches the form of a print command.
+     * @param currentGameBoard represents the game board that will be printed out after executing the print command.
+     * @param inputParts represents the parts of the user input containing the information needed for this command.
+     */
     private void printCommandCheck(char[][] currentGameBoard, String[] inputParts) {
         try {
             if (inputParts[0].equals(PRINT_COMMAND_NAME)) {
@@ -84,6 +94,11 @@ public class GamePlay {
         }
     }
 
+    /**
+     * This method checks if the input matches the form of a field command.
+     * @param currentGameBoard represents the game board that will be referenced in the field command.
+     * @param inputParts represents the parts of the user input containing the information needed for this command.
+     */
     private void fieldCommandCheck(char[][] currentGameBoard, String[] inputParts) {
         try {
             if (inputParts[0].equals(FIELD_COMMAND_NAME)) {

@@ -5,7 +5,7 @@ package edu.kit.kastel;
  *
  * @author uijyl
  */
-public class Main {
+public final class Main {
     private Main() {
 
     }

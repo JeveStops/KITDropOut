@@ -9,7 +9,7 @@ public final class HelperMethod {
     private HelperMethod() {
 
     }
-    private static final char ERROR_SYMBOL = '!';
+    private final static char ERROR_SYMBOL = '!';
     private static final int TWO = 2;
 
     /**
