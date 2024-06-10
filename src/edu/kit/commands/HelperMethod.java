@@ -6,11 +6,11 @@ package edu.kit.commands;
  * @author uijyl
  */
 public final class HelperMethod {
+    private static final char ERROR_SYMBOL = '!';
+    private static final int TWO = 2;
     private HelperMethod() {
 
     }
-    private final static char ERROR_SYMBOL = '!';
-    private static final int TWO = 2;
 
     /**
      * This method checks what character is present on the given coordinates on the game board.

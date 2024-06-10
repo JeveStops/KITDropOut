@@ -6,9 +6,6 @@ package edu.kit.commands;
  * @author uijyl
  */
 public class MoveCommand {
-    public MoveCommand() {
-
-    }
     public static boolean isOutside = false;
     public static final char BLACK_NORTH = 'N';
     public static final char BLACK_SOUTH = 'S';
@@ -18,6 +15,9 @@ public class MoveCommand {
     public static final char WHITE_SOUTH = 's';
     public static final char WHITE_EAST = 'o';
     public static final char WHITE_WEST = 'w';
+    public MoveCommand() {
+
+    }
 
     /**
      * This method is used to check if the ant is outside the game board.
