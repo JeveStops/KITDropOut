@@ -10,25 +10,12 @@ public class PositionCommand {
 
     }
 
-    private static final int TWO = 2;
-
     /**
      * This method returns the current position of the ant.
      * @param currentGameBoard represents the current game board that the position-
-     * @return This method returns the position of the only non digit character on the game board which represents the ant.
+     * @return The x and y coordinate of the position of the ant.
      */
     public int[] position(char[][] currentGameBoard) {
-        int[] coordinates = new int[TWO];
-        int rows = currentGameBoard.length;
-        int cols = currentGameBoard[0].length;
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (!Character.isDigit(currentGameBoard[i][j])) {
-                    coordinates[0] = i;
-                    coordinates[1] = j;
-                }
-            }
-        }
-        return coordinates;
+        return HelperMethod.positionCheck(currentGameBoard);
     }
 }

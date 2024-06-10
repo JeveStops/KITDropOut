@@ -1,6 +1,9 @@
 package edu.kit.kastel;
 
-import edu.kit.commands.*;
+import edu.kit.commands.MoveCommand;
+import edu.kit.commands.FieldCommand;
+import edu.kit.commands.PositionCommand;
+import edu.kit.commands.PrintCommand;
 
 import java.util.Scanner;
 
@@ -10,6 +13,7 @@ import java.util.Scanner;
  * @author uijyl
  */
 public class GamePlay {
+    private static final String COMMA_CHARACTER = ",";
     private static final String MOVE_COMMAND_NAME = "move";
     private static final String PRINT_COMMAND_NAME = "print";
     private static final String POSITION_COMMAND_NAME = "position";
@@ -18,7 +22,7 @@ public class GamePlay {
 
     /**
      * This constructor is used to initialize a game play instance with the commands.
-     * @param gameBoard is the game board where the game play will be started.
+     * @param gameBoard represents the game board where the game play will be started.
      */
     public GamePlay(char[][] gameBoard) {
         char[][] currentGameBoard = gameBoard;
@@ -38,12 +42,11 @@ public class GamePlay {
                         PositionCommand positionCheck = new PositionCommand();
                         int rowIndex = positionCheck.position(currentGameBoard)[0];
                         int colIndex = positionCheck.position(currentGameBoard)[1];
-                        System.out.println(rowIndex + "," + colIndex);
+                        System.out.println(rowIndex + COMMA_CHARACTER + colIndex);
                     }
                     case MOVE_COMMAND_NAME -> {
                         if (inputParts.length > 1) {
                             MoveCommand mover = new MoveCommand();
-                            PrintCommand printer = new PrintCommand();
                             int moveValue = Integer.parseInt(inputParts[1]);
                             currentGameBoard = mover.move(currentGameBoard, moveValue);
                             if (mover.getIsOutside()) {
@@ -56,7 +59,7 @@ public class GamePlay {
                     case FIELD_COMMAND_NAME -> {
                         if (inputParts.length > 1) {
                             FieldCommand fieldCheck = new FieldCommand();
-                            String[] coordinateValues = inputParts[1].split(",");
+                            String[] coordinateValues = inputParts[1].split(COMMA_CHARACTER);
                             int xCoordinate = Integer.parseInt(coordinateValues[0]);
                             int yCoordinate = Integer.parseInt(coordinateValues[1]);
                             if (yCoordinate < currentGameBoard.length && xCoordinate < currentGameBoard[0].length) {

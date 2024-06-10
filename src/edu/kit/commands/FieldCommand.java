@@ -6,7 +6,6 @@ package edu.kit.commands;
  * @author uijyl
  */
 public class FieldCommand {
-    private static final char ERROR_SYMBOL = '!';
     public FieldCommand() {
 
     }
@@ -20,11 +19,6 @@ public class FieldCommand {
      * @return This method returns the character on the specified position of the matrix.
      */
     public char field(char[][] currentGameBoard, int rowIndex, int colIndex) {
-        if (rowIndex < currentGameBoard.length && colIndex < currentGameBoard[0].length) {
-            return currentGameBoard[rowIndex][colIndex];
-        } else {
-            return ERROR_SYMBOL;
-        }
-
+        return HelperMethod.fieldCheck(currentGameBoard, rowIndex, colIndex);
     }
 }

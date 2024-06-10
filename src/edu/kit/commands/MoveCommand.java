@@ -152,14 +152,12 @@ public class MoveCommand {
      */
     public char[][] singleMove(char[][] currentGameBoard) {
         MoveCommand mover = new MoveCommand();
-        PositionCommand positionCheck = new PositionCommand();
-        FieldCommand fieldCheck = new FieldCommand();
         char[][] newGameBoard;
-        int rowIndex = positionCheck.position(currentGameBoard)[0];
-        int colIndex = positionCheck.position(currentGameBoard)[1];
-        if (Character.isUpperCase(fieldCheck.field(currentGameBoard, rowIndex, colIndex))) {
+        int rowIndex = HelperMethod.positionCheck(currentGameBoard)[0];
+        int colIndex = HelperMethod.positionCheck(currentGameBoard)[1];
+        if (Character.isUpperCase(HelperMethod.fieldCheck(currentGameBoard, rowIndex, colIndex))) {
             mover.nextDirectionBlack(currentGameBoard, rowIndex, colIndex);
-        } else if (Character.isLowerCase(fieldCheck.field(currentGameBoard, rowIndex, colIndex))) {
+        } else if (Character.isLowerCase(HelperMethod.fieldCheck(currentGameBoard, rowIndex, colIndex))) {
             mover.nextDirectionWhite(currentGameBoard, rowIndex, colIndex);
         }
         newGameBoard = currentGameBoard;
