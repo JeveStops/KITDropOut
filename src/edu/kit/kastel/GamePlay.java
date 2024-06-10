@@ -8,7 +8,7 @@ import edu.kit.commands.PrintCommand;
 import java.util.Scanner;
 
 /**
- * A class containing the game play loop of the "langton" ant.
+ * A class containing the game play loop of the langton-ant.
  *
  * @author uijyl
  */
