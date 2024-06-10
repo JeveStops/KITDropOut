@@ -20,66 +20,85 @@ public class GamePlay {
     private static final String FIELD_COMMAND_NAME = "field";
     private static final String QUIT_COMMAND_NAME = "quit";
 
+    public GamePlay() {
+
+    }
     /**
-     * This constructor is used to initialize a game play instance with the commands.
+     * This method is used to initialize a game play with the commands.
      * @param gameBoard represents the game board where the game play will be started.
      */
-    public GamePlay(char[][] gameBoard) {
+    public void gamePlayStart(char[][] gameBoard) {
         char[][] currentGameBoard = gameBoard;
+        GamePlay gamePlayStarter = new GamePlay();
         Scanner scanner = new Scanner(System.in);
         String userInput;
 
         while (true) {
             userInput = scanner.nextLine();
             String[] inputParts = userInput.split(" ");
+            gamePlayStarter.printCommandCheck(currentGameBoard, inputParts);
+            gamePlayStarter.positionCommandCheck(currentGameBoard, inputParts);
+            gamePlayStarter.fieldCommandCheck(currentGameBoard, inputParts);
             try {
-                switch (inputParts[0]) {
-                    case PRINT_COMMAND_NAME -> {
-                        PrintCommand printer = new PrintCommand();
-                        printer.print(currentGameBoard);
-                    }
-                    case POSITION_COMMAND_NAME -> {
-                        PositionCommand positionCheck = new PositionCommand();
-                        int rowIndex = positionCheck.position(currentGameBoard)[0];
-                        int colIndex = positionCheck.position(currentGameBoard)[1];
-                        System.out.println(rowIndex + COMMA_CHARACTER + colIndex);
-                    }
-                    case MOVE_COMMAND_NAME -> {
-                        if (inputParts.length > 1) {
-                            MoveCommand mover = new MoveCommand();
-                            int moveValue = Integer.parseInt(inputParts[1]);
-                            currentGameBoard = mover.move(currentGameBoard, moveValue);
-                            if (mover.getIsOutside()) {
-                                return;
-                            }
-                        } else {
-                            System.err.println("Error: Missing Argument for the move-command!");
+                if (inputParts[0].equals(QUIT_COMMAND_NAME)) {
+                    scanner.close();
+                    return;
+                } else if (inputParts[0].equals(MOVE_COMMAND_NAME)) {
+                    if (inputParts.length > 1) {
+                        MoveCommand mover = new MoveCommand();
+                        int moveValue = Integer.parseInt(inputParts[1]);
+                        currentGameBoard = mover.move(currentGameBoard, moveValue);
+                        if (mover.getIsOutside()) {
+                            scanner.close();
+                            return;
                         }
                     }
-                    case FIELD_COMMAND_NAME -> {
-                        if (inputParts.length > 1) {
-                            FieldCommand fieldCheck = new FieldCommand();
-                            String[] coordinateValues = inputParts[1].split(COMMA_CHARACTER);
-                            int xCoordinate = Integer.parseInt(coordinateValues[0]);
-                            int yCoordinate = Integer.parseInt(coordinateValues[1]);
-                            if (yCoordinate < currentGameBoard.length && xCoordinate < currentGameBoard[0].length) {
-                                System.out.println(fieldCheck.field(currentGameBoard, xCoordinate, yCoordinate));
-                            } else {
-                                System.err.println("Error: Index is out of bounds!");
-                            }
-                        } else {
-                            System.err.println("Error: Missing Argument for the move-command!");
-                        }
-                    }
-                    case QUIT_COMMAND_NAME -> {
-                        scanner.close();
-                        return;
-                    }
-                    default -> System.err.println("Error: Invalid command!");
                 }
             } catch (NumberFormatException e) {
                 System.err.println("Error: Invalid command arguments!");
             }
+        }
+    }
+
+    private void positionCommandCheck(char[][] currentGameBoard, String[] inputParts) {
+        try {
+            if (inputParts[0].equals(POSITION_COMMAND_NAME)) {
+                PositionCommand positionCheck = new PositionCommand();
+                int rowIndex = positionCheck.position(currentGameBoard)[0];
+                int colIndex = positionCheck.position(currentGameBoard)[1];
+                System.out.println(rowIndex + COMMA_CHARACTER + colIndex);
+            }
+        } catch (NumberFormatException e) {
+            System.err.println("Error: Invalid command arguments!");
+        }
+    }
+
+    private void printCommandCheck(char[][] currentGameBoard, String[] inputParts) {
+        try {
+            if (inputParts[0].equals(PRINT_COMMAND_NAME)) {
+                PrintCommand printer = new PrintCommand();
+                printer.print(currentGameBoard);
+            }
+        } catch (NumberFormatException e) {
+            System.err.println("Error: Invalid command arguments!");
+        }
+    }
+
+    private void fieldCommandCheck(char[][] currentGameBoard, String[] inputParts) {
+        try {
+            if (inputParts[0].equals(FIELD_COMMAND_NAME)) {
+                if (inputParts.length > 1) {
+                    FieldCommand fieldCheck = new FieldCommand();
+                    String[] coordinateValues = inputParts[1].split(COMMA_CHARACTER);
+                    int xCoordinate = Integer.parseInt(coordinateValues[0]);
+                    int yCoordinate = Integer.parseInt(coordinateValues[1]);
+                    if (yCoordinate < currentGameBoard.length && xCoordinate < currentGameBoard[0].length) {
+                        System.out.println(fieldCheck.field(currentGameBoard, xCoordinate, yCoordinate));
+                    }
+                }
+            }
+        } catch (NumberFormatException e) {
+            System.err.println("Error: Invalid command arguments!");
         }
     }
 }

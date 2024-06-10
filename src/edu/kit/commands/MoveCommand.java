@@ -83,6 +83,7 @@ public class MoveCommand {
                     isOutside = true;
                 }
             }
+            default -> System.err.println("Error: No ant was found!");
         }
     }
 
@@ -142,6 +143,7 @@ public class MoveCommand {
                     isOutside = true;
                 }
             }
+            default -> System.err.println("Error: No ant was found!");
         }
     }
 

@@ -12,6 +12,7 @@ public class GameFileReader {
      * This method reads a game file by using the FileHelper class and converts the game file into a usable game board.
      * @param args represents the data structure where the game file is located.
      * @return This method returns the game file depicted as a game board by converting it to a matrix.
+     * @throws IllegalArgumentException if an invalid path has been passed.
      */
     public char[][] gameBoardInitiator(String[] args) {
         List<String> fileLines = FileHelper.readAllLines(args[0]);

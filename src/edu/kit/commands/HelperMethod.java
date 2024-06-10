@@ -5,7 +5,7 @@ package edu.kit.commands;
  *
  * @author uijyl
  */
-public class HelperMethod {
+public final class HelperMethod {
     private HelperMethod() {
 
     }
