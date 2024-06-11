@@ -20,6 +20,9 @@ public class GamePlay {
     private static final String FIELD_COMMAND_NAME = "field";
     private static final String QUIT_COMMAND_NAME = "quit";
 
+    /**
+     * Constructor for creating a game play instance that can use the methods of this class.
+     */
     public GamePlay() {
 
     }

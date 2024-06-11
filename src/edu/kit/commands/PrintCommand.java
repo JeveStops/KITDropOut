@@ -6,6 +6,9 @@ package edu.kit.commands;
  * @author uijyl
  */
 public class PrintCommand {
+    /**
+     * Constructor for creating a print command instance that can use the methods of this class.
+     */
     public PrintCommand() {
 
     }

@@ -15,6 +15,9 @@ public class MoveCommand {
     public static final char WHITE_SOUTH = 's';
     public static final char WHITE_EAST = 'o';
     public static final char WHITE_WEST = 'w';
+    /**
+     * Constructor for creating a move command instance that can use the methods of this class.
+     */
     public MoveCommand() {
 
     }

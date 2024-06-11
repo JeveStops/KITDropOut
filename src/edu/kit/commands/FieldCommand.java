@@ -6,6 +6,9 @@ package edu.kit.commands;
  * @author uijyl
  */
 public class FieldCommand {
+    /**
+     * Constructor for creating a field command instance that can use the methods of this class.
+     */
     public FieldCommand() {
 
     }

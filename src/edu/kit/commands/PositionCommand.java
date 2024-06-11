@@ -6,6 +6,9 @@ package edu.kit.commands;
  * @author uijyl
  */
 public class PositionCommand {
+    /**
+     * Constructor for creating a position command instance that can use the methods of this class.
+     */
     public PositionCommand() {
 
     }
